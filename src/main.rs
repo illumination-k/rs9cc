@@ -1,6 +1,6 @@
 use std::env;
-use std::process;
 use std::error::Error;
+use std::process;
 fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().collect();
 
