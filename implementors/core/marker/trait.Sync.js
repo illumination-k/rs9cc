@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["rs9cc"] = [{"text":"impl Sync for Node","synthetic":true,"types":[]},{"text":"impl Sync for NodeKind","synthetic":true,"types":[]},{"text":"impl Sync for Token","synthetic":true,"types":[]},{"text":"impl Sync for TokenIter","synthetic":true,"types":[]},{"text":"impl Sync for TokenKind","synthetic":true,"types":[]},{"text":"impl Sync for Dot","synthetic":true,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

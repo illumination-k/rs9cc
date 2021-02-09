@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["rs9cc"] = [{"text":"impl UnwindSafe for Node","synthetic":true,"types":[]},{"text":"impl UnwindSafe for NodeKind","synthetic":true,"types":[]},{"text":"impl UnwindSafe for Token","synthetic":true,"types":[]},{"text":"impl UnwindSafe for TokenIter","synthetic":true,"types":[]},{"text":"impl UnwindSafe for TokenKind","synthetic":true,"types":[]},{"text":"impl UnwindSafe for Dot","synthetic":true,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["rs9cc"] = [{"text":"impl Unpin for Node","synthetic":true,"types":[]},{"text":"impl Unpin for NodeKind","synthetic":true,"types":[]},{"text":"impl Unpin for Token","synthetic":true,"types":[]},{"text":"impl Unpin for TokenIter","synthetic":true,"types":[]},{"text":"impl Unpin for TokenKind","synthetic":true,"types":[]},{"text":"impl Unpin for Dot","synthetic":true,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

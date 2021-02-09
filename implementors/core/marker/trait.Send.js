@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["rs9cc"] = [{"text":"impl Send for Node","synthetic":true,"types":[]},{"text":"impl Send for NodeKind","synthetic":true,"types":[]},{"text":"impl Send for Token","synthetic":true,"types":[]},{"text":"impl Send for TokenIter","synthetic":true,"types":[]},{"text":"impl Send for TokenKind","synthetic":true,"types":[]},{"text":"impl Send for Dot","synthetic":true,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

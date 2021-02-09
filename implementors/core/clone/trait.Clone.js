@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["rs9cc"] = [{"text":"impl Clone for NodeKind","synthetic":false,"types":[]},{"text":"impl Clone for Node","synthetic":false,"types":[]},{"text":"impl Clone for TokenKind","synthetic":false,"types":[]},{"text":"impl Clone for Token","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

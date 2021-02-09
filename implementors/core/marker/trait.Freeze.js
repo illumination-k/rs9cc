@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["rs9cc"] = [{"text":"impl Freeze for Node","synthetic":true,"types":[]},{"text":"impl Freeze for NodeKind","synthetic":true,"types":[]},{"text":"impl Freeze for Token","synthetic":true,"types":[]},{"text":"impl Freeze for TokenIter","synthetic":true,"types":[]},{"text":"impl Freeze for TokenKind","synthetic":true,"types":[]},{"text":"impl Freeze for Dot","synthetic":true,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
