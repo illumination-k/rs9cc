@@ -70,19 +70,6 @@ impl Dot {
     }
 }
 
-fn rec_dot(node: &Box<Node>, counter: &mut usize, node_vec: &mut Vec<String>, edge_vec: &mut Vec<String>) {
-    let node_val = get_val(node.deref());
-    
-    if node.lhs().is_none() && node.rhs().is_none() { return }
-
-    let rhs_val = get_val(&node.deref().rhs().unwrap());
-    let lhs_val = get_val(&node.deref().lhs().unwrap());
-    edge_vec.push(format!("  {} -> {}", node_val, rhs_val));
-    edge_vec.push(format!("  {} -> {}", node_val, lhs_val));
-    rec_dot(&node.rhs().unwrap(), &mut (*counter + 1), node_vec, edge_vec);
-    rec_dot(&node.lhs().unwrap(), &mut (*counter + 1), node_vec, edge_vec);
-}
-
 #[cfg(test)]
 mod test {
     use super::*;

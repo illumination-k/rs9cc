@@ -115,7 +115,7 @@ pub fn gen(node: &Box<Node>) {
     println!("  push rax");
 }
 
-#[warn(unreachable_patterns)]
+#[allow(unreachable_patterns)]
 pub fn get_val(node: &Node) -> String {
     match node.kind() {
         NodeKind::NdADD => { "plus".to_string() },
