@@ -27,6 +27,22 @@ impl Node {
             val: val
         }
     }
+
+    pub fn kind(&self) -> &NodeKind {
+        &self.node_kind
+    }
+
+    pub fn val(&self) -> Option<String> {
+        self.val.clone()
+    }
+
+    pub fn rhs(&self) -> Option<Box<Node>> {
+        self.rhs.clone()
+    }
+
+    pub fn lhs(&self) -> Option<Box<Node>> {
+        self.lhs.clone()
+    }
 }
 
 pub fn mul(tokenizer: &mut Peekable<TokenIter>) -> Box<Node> {
@@ -99,6 +115,18 @@ pub fn gen(node: &Box<Node>) {
     println!("  push rax");
 }
 
+#[warn(unreachable_patterns)]
+pub fn get_val(node: &Node) -> String {
+    match node.kind() {
+        NodeKind::NdADD => { "plus".to_string() },
+        NodeKind::NdSub => { "sub".to_string() },
+        NodeKind::NdDiv => { "div".to_string()},
+        NodeKind::NdMul => { "mul".to_string() },
+        NodeKind::NdNum => { node.val().unwrap() },
+        _ => { unimplemented!() }
+    }
+} 
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -109,7 +137,7 @@ mod test {
         let mut tokenizer = s.tokenize().peekable();
 
         let node = expr(&mut tokenizer);
-        dbg!(&node);
+        dbg!(node);
     }
 
     #[test]

@@ -2,7 +2,7 @@
 assert() {
   expected="$1"
   input="$2"
-  ./target/debug/rs9cc "$input" > tmp.s
+  ./target/debug/compile "$input" > tmp.s
   cc -o tmp tmp.s
   ./tmp
   actual="$?"

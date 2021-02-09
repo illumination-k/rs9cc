@@ -5,7 +5,7 @@ pub enum TokenKind {
     TkReserved,
     TkNum,
 }
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 pub struct Token {
     pub token_kind: TokenKind,
     pub val: String,

@@ -9,11 +9,18 @@ args = ["test.sh"]
 
 [tasks.drun]
 script = """
-#!/bin/bash
-cargo run -- ${@} > tmp.s
+
+cargo run --bin compile -- ${@} > tmp.s
 cc -o tmp tmp.s
 echo "--- compilier results ---"
 ./tmp
 echo $?
 echo "--- fin ---"
+"""
+
+[tasks.ast]
+script = """
+#!/bin/bash
+cargo run --bin dot -- ${@} > tmp.dot
+dot -Tpng tmp.dot -o tmp.png
 """
