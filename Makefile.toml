@@ -6,3 +6,14 @@ args = ["build"]
 dependencies = ["build"]
 command = "bash"
 args = ["test.sh"]
+
+[tasks.drun]
+script = """
+#!/bin/bash
+cargo run -- ${@} > tmp.s
+cc -o tmp tmp.s
+echo "--- compilier results ---"
+./tmp
+echo $?
+echo "--- fin ---"
+"""
