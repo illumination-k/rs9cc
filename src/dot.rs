@@ -24,6 +24,11 @@ impl Dot {
             edge_vec: vec![]
         }
     }
+    
+    fn update_count(&mut self) -> usize {
+        self.counter += 1;
+        self.counter
+    }
 
     fn _rec_write(&mut self, node: &Box<Node>, pre_node_cnt: usize) {
         if node.lhs().is_none() && node.rhs().is_none() { return }
@@ -35,14 +40,12 @@ impl Dot {
             // self.counter += 1;
         }
 
-        self.counter += 1;
         let rhs_val = get_val(&node.deref().rhs().unwrap());
-        let rhs_cnt = self.counter;
+        let rhs_cnt = self.update_count();
         let rhs_dot = make_dot_node(rhs_cnt, rhs_val);
         
-        self.counter += 1;
         let lhs_val = get_val(&node.deref().lhs().unwrap());
-        let lhs_cnt = self.counter;
+        let lhs_cnt = self.update_count();
         let lhs_dot = make_dot_node(lhs_cnt, lhs_val);
 
         self.node_vec.push(lhs_dot);
