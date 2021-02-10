@@ -5,7 +5,6 @@ use std::collections::HashSet;
 struct OpWords {
     op_words: HashSet<String>,
     max_length: usize,
-    now_length: usize,
 }
 
 impl OpWords {
@@ -14,7 +13,6 @@ impl OpWords {
         Self {
             op_words: op_words.into_iter().map(|x| x.to_string()).collect(),
             max_length: max_length,
-            now_length: max_length
         }
     }
 
@@ -22,14 +20,19 @@ impl OpWords {
         self.op_words.contains(x)
     }
 
-    fn decrement_len(&mut self) {
-        self.now_length -= 1
+    fn contains_u8(&self, x: &[u8]) -> bool {
+        unsafe { self.contains(String::from_utf8_unchecked(x.to_vec()).as_ref()) }
+    }
+
+
+    fn ops(&self, len: usize) -> Vec<String> {
+        self.op_words.iter().filter(|x| x.len() == len).map(|x| x.clone()).collect()
     }
 }
 
 impl Default for OpWords {
     fn default() -> Self {
-        let op_words = vec!["+", "-", "/", "*", "==", "=!", ">=", "<=", "<", ">"];
+        let op_words = vec!["+", "-", "/", "*", "==", "=!", ">=", "<=", "<", ">", "(", ")"];
         OpWords::new(op_words)
     }
 }
@@ -57,6 +60,7 @@ impl Token {
 
 pub struct TokenIter {
     s: String,
+    op_words: OpWords,
 }
 
 impl Iterator for TokenIter {
@@ -92,14 +96,34 @@ impl Iterator for TokenIter {
                 }
             },
             TokenKind::TkReserved => {
+                // +-2
+                // bytes [+-2] vec []
+                // bytes [-2]  vec [+]
+                // bytes [2] vec [+-]
+                // break
                 while let Some(byte) = bytes.pop_front() {
                     if !byte.is_ascii_digit() && byte != b' ' {
                         val.push(byte);
-                        break;
+                        // break;
                     } else {
                         bytes.push_front(byte);
                         break;
                     }
+                }
+                //val.reverse();
+                let mut now_length = self.op_words.max_length;
+                while now_length > 0 {
+                    if now_length <= val.len() {
+                        // dbg!(unsafe {String::from_utf8_unchecked(val[..now_length].to_owned().to_vec())});
+                        if self.op_words.contains_u8(&val[..now_length]) {
+                            for &v in val[now_length..].iter().rev() {
+                                bytes.push_front(v)
+                            }
+                            val = val[..now_length].to_vec();
+                            break;
+                        }
+                    }
+                    now_length -= 1;
                 }
             }
         }
@@ -117,7 +141,10 @@ pub trait TokenExt {
 
 impl TokenExt for String {
     fn tokenize(&self) -> TokenIter {
-        TokenIter { s: self.to_owned() }
+        TokenIter {
+            s: self.to_owned(),
+            op_words: Default::default(),
+        }
     }
 }
 
@@ -140,6 +167,14 @@ pub fn consume(op: &str, iter: &mut Peekable<TokenIter>) -> bool {
 mod test {
     use super::*;
 
+    #[test]
+    fn test_op_words() {
+        let mut op_words: OpWords = Default::default();
+        assert!(op_words.contains("*"));
+        assert!(op_words.contains("("));
+        assert!(op_words.contains_u8(b"("));
+        assert!(!op_words.contains_u8(b"!=)"));
+    }
     #[test]
     fn test_tokenizer() {
         let s = "13 + 2 - 3".to_string();
