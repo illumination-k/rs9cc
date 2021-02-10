@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["NodeKind",""]],"fn":[["expr",""],["gen",""],["get_val",""],["mul",""],["primary",""]],"struct":[["Node",""]]});
+initSidebarItems({"enum":[["NodeKind",""]],"fn":[["add",""],["equaility",""],["expr",""],["gen",""],["get_val",""],["mul",""],["primary",""],["relational",""],["unary",""]],"struct":[["Node",""]]});
