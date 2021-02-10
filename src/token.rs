@@ -1,4 +1,39 @@
 use std::iter::Peekable;
+use std::collections::HashSet;
+
+#[derive(Debug, Clone)]
+struct OpWords {
+    op_words: HashSet<String>,
+    max_length: usize,
+    now_length: usize,
+}
+
+impl OpWords {
+    fn new(op_words: Vec<&str>) -> Self {
+        let max_length = op_words.iter().map(|x| x.len()).max().unwrap();
+        Self {
+            op_words: op_words.into_iter().map(|x| x.to_string()).collect(),
+            max_length: max_length,
+            now_length: max_length
+        }
+    }
+
+    fn contains(&self, x: &str) -> bool {
+        self.op_words.contains(x)
+    }
+
+    fn decrement_len(&mut self) {
+        self.now_length -= 1
+    }
+}
+
+impl Default for OpWords {
+    fn default() -> Self {
+        let op_words = vec!["+", "-", "/", "*", "==", "=!", ">=", "<=", "<", ">"];
+        OpWords::new(op_words)
+    }
+}
+
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum TokenKind {
